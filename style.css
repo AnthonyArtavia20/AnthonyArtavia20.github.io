@@ -78,21 +78,21 @@ nav .brand-text{
   line-height:1.25;
 }
 nav .brand-eyebrow{
-  font-size:0.62rem;
+  font-size:0.90rem;
   text-transform:uppercase;
   letter-spacing:0.09em;
   color:var(--green);
   font-weight:600;
 }
 nav .brand-name{
-  font-size:0.92rem;
+  font-size:1.40rem;
   font-weight:700;
   color:var(--text);
   text-transform:none;
   letter-spacing:normal;
 }
 nav .brand-degree{
-  font-size:0.68rem;
+  font-size:1.06rem;
   color:var(--muted);
   font-weight:400;
 }
