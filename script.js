@@ -104,6 +104,32 @@
     window.scrollTo({ top: finalY, behavior: 'smooth' });
   }
 
+  // Aplica la clase que dispara el parpadeo (definida en style.css) sobre
+  // la sección/columna a la que se llegó, y la quita sola cuando la
+  // animación termina — así queda "como estaba" después del efecto.
+  function flashTarget(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    // Por si se hace click varias veces seguidas al mismo link: quitamos
+    // la clase y forzamos un reflow (leer offsetWidth) para poder
+    // reiniciar la animación desde cero, aunque la clase sea "la misma".
+    target.classList.remove('section-flash');
+    void target.offsetWidth;
+    target.classList.add('section-flash');
+
+    target.addEventListener(
+      'animationend',
+      (e) => {
+        // Puede haber más de una animación (el pulso, el scan, el texto del h2)
+        // y el evento sube por bubbling; solo removemos cuando termina la
+        // que corre directamente sobre el propio target, no sobre el h2 hijo.
+        if (e.target === target) target.classList.remove('section-flash');
+      },
+      { once: true }
+    );
+  }
+
   navLinks.forEach((link) => {
     link.addEventListener('click', (e) => {
       const id = link.getAttribute('href').slice(1); // quita el "#"
@@ -111,6 +137,10 @@
       e.preventDefault(); // evita el salto instantáneo por defecto del navegador
       scrollToTarget(id);
       history.pushState(null, '', `#${id}`); // mantiene la URL actualizada
+
+      // Esperamos a que el scroll suave termine (aprox.) antes de resaltar,
+      // si no, el efecto arranca mientras la sección todavía se está moviendo.
+      setTimeout(() => flashTarget(id), 550);
     });
   });
 })();

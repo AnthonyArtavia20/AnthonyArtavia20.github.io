@@ -286,6 +286,53 @@ header{max-width:1120px; margin:0 auto; padding:72px 24px 40px;}
   .corner-trace path{animation:none;}
 }
 
+/* ---- resaltado al llegar a una sección desde el nav ---- */
+/* Se aplica por JS (section-flash) al elemento destino justo después del scroll.
+    Parpadea 2 veces (contorno + fondo tenue) y el texto del h2 acompaña el pulso;
+   además hay un barrido de luz de arriba a abajo, una sola pasada, como un "scan". */
+.section-flash{
+  position:relative;
+  border-radius:14px;
+  animation:section-pulse 0.65s ease-in-out 2;
+}
+@keyframes section-pulse{
+  0%, 100%{
+    box-shadow:inset 0 0 0 0 rgba(126,224,129,0), 0 0 0 0 rgba(126,224,129,0);
+    background-color:transparent;
+  }
+  50%{
+    box-shadow:inset 0 0 0 2px rgba(126,224,129,0.55), 0 0 40px rgba(126,224,129,0.22);
+    background-color:rgba(126,224,129,0.045);
+  }
+}
+.section-flash h2{
+  animation:heading-pulse 0.65s ease-in-out 2;
+}
+@keyframes heading-pulse{
+  0%, 100%{ color:var(--amber); text-shadow:none; }
+  50%{ color:var(--green); text-shadow:0 0 14px rgba(126,224,129,0.65); }
+}
+/* barrido único, de arriba hacia abajo, superpuesto sobre la sección */
+.section-flash::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(to bottom, transparent 0%, rgba(126,224,129,0.16) 45%, transparent 90%);
+  background-size:100% 220%;
+  background-position:0 -120%;
+  animation:section-scan 1.3s ease-out 1;
+}
+@keyframes section-scan{
+  0%{ background-position:0 -120%; opacity:0; }
+  12%{ opacity:1; }
+  100%{ background-position:0 120%; opacity:0; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .section-flash, .section-flash h2, .section-flash::before{ animation:none; }
+}
+
 section{max-width:1120px; margin:0 auto; padding:56px 24px; position:relative;}
 section h2{
   font-family:'JetBrains Mono', monospace;
@@ -373,6 +420,15 @@ section h2::before{content:"$ "; color:var(--muted);}
   display:grid;
   grid-template-columns:1.1fr 0.9fr;
   gap:56px;
+}
+.split-col{
+  /* Truco: padding + margin negativo del mismo valor se cancelan visualmente
+     (el texto queda exactamente donde estaba), pero el "cuadro" real del
+     elemento (el que usa .section-flash para el contorno/scan) queda más
+     grande alrededor del texto — igual de simétrico que en las secciones
+     normales, que tienen su propio padding de sobra. */
+  padding:28px 24px;
+  margin:-28px -24px;
 }
 .split-col h2{margin-bottom:20px;}
 .split-col .lede{max-width:none;}
