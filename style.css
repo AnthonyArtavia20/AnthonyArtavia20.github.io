@@ -60,8 +60,42 @@ nav.is-scrolled{
   animation:terminal-glow 5s ease-in-out infinite;
   padding:11px 20px;
 }
-nav .brand{color:var(--text); font-weight:700; display:inline-flex; align-items:center;}
-nav .brand .at{color:var(--green);}
+nav .brand{
+  display:flex; align-items:center; gap:10px;
+}
+nav .brand-icon{
+  display:flex; align-items:center; justify-content:center;
+  width:34px; height:34px;
+  flex-shrink:0;
+  color:var(--green);
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:rgba(126,224,129,0.06);
+}
+nav .brand-icon svg{width:19px; height:19px;}
+nav .brand-text{
+  display:flex; flex-direction:column;
+  line-height:1.25;
+}
+nav .brand-eyebrow{
+  font-size:0.62rem;
+  text-transform:uppercase;
+  letter-spacing:0.09em;
+  color:var(--green);
+  font-weight:600;
+}
+nav .brand-name{
+  font-size:0.92rem;
+  font-weight:700;
+  color:var(--text);
+  text-transform:none;
+  letter-spacing:normal;
+}
+nav .brand-degree{
+  font-size:0.68rem;
+  color:var(--muted);
+  font-weight:400;
+}
 nav ul{list-style:none; display:flex; gap:4px;}
 nav li{position:relative;}
 nav a{
@@ -96,6 +130,7 @@ nav a:hover .nav-icon, nav a:focus-visible .nav-icon{
 
 @media (max-width:600px){
   nav{top:0; border-radius:0;}
+  nav .brand-eyebrow, nav .brand-degree{display:none;}
 }
 
 header{max-width:1120px; margin:0 auto; padding:72px 24px 40px;}
