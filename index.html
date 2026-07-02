@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+  <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Anthony Artavia — Ingeniería en Computadores(Computer Engineering)</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="style.css">
+    </head>
+
+  <body>
+
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow" aria-hidden="true"></div>
+
+    <nav id="site-nav"> <!-- Barra de navegación, diferentes secciones-->
+      <span class="brand">artavia<span class="at">@</span>tec</span>
+      <ul>
+        <li><a href="#proyectos"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h6l2 2h10v10.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6.5z"/></svg></span>proyectos</a></li>
+        <li><a href="#experiencia"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2.5"/></svg></span>experiencia</a></li>
+        <li><a href="#skills"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="6.5" width="11" height="11" rx="1"/><path d="M9.5 3.5v3M14.5 3.5v3M9.5 17.5v3M14.5 17.5v3M3.5 9.5h3M3.5 14.5h3M17.5 9.5h3M17.5 14.5h3"/></svg></span>skills</a></li>
+        <li><a href="#contacto"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><path d="M4 7l8 6 8-6"/></svg></span>contacto</a></li>
+      </ul>
+    </nav>
+
+    <header> <!--terminal que presenta mi información-->
+      <div class="terminal-frame">
+        <svg class="corner-trace tl" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M6 32 L6 17 L17 6 L32 6" fill="none" stroke="var(--ef-green,#a7c080)" stroke-width="2"/>
+          <circle cx="6" cy="32" r="2.6" fill="var(--ef-green,#a7c080)"/>
+          <circle cx="32" cy="6" r="2.6" fill="var(--ef-aqua,#83c092)"/>
+        </svg>
+        <svg class="corner-trace tr" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M6 32 L6 17 L17 6 L32 6" fill="none" stroke="var(--ef-green,#a7c080)" stroke-width="2"/>
+          <circle cx="6" cy="32" r="2.6" fill="var(--ef-green,#a7c080)"/>
+          <circle cx="32" cy="6" r="2.6" fill="var(--ef-aqua,#83c092)"/>
+        </svg>
+        <svg class="corner-trace bl" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M6 32 L6 17 L17 6 L32 6" fill="none" stroke="var(--ef-green,#a7c080)" stroke-width="2"/>
+          <circle cx="6" cy="32" r="2.6" fill="var(--ef-green,#a7c080)"/>
+          <circle cx="32" cy="6" r="2.6" fill="var(--ef-aqua,#83c092)"/>
+        </svg>
+        <svg class="corner-trace br" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M6 32 L6 17 L17 6 L32 6" fill="none" stroke="var(--ef-green,#a7c080)" stroke-width="2"/>
+          <circle cx="6" cy="32" r="2.6" fill="var(--ef-green,#a7c080)"/>
+          <circle cx="32" cy="6" r="2.6" fill="var(--ef-aqua,#83c092)"/>
+        </svg>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="terminal-title">artavia@tec: ~</span>
+        </div>
+        <div class="terminal-body" id="term-body">
+          <div><span class="prompt">➜</span> <span class="path">~</span> <span id="typed-cmd"></span><span class="cursor" id="cur"></span></div>
+          <div id="term-output"></div>
+        </div>
+        <div class="status-bar" aria-hidden="true">
+          <span class="status-seg status-session">everforest (artavia)</span>
+          <span class="status-seg status-mode">NORMAL</span>
+          <span class="status-seg status-tab">Tab #1</span>
+        </div>
+      </div>
+      </div>
+    </header>
+
+    <section id="about-contact" class="split">
+      <div class="split-col">
+        <h2>whoami</h2> <!-- Información a desplegar -->
+        <p class="lede">Anthony Artavia Leitón — estudiante de Ingeniería en Computadores en el TEC, con base sólida en programación, algoritmos y sistemas digitales (Electrónica), y experiencia previa como técnico en redes.</p>
+        <p>Me muevo cómodo en ambos extremos de la pila: desde ensamblador y diseño de circuitos digitales hasta APIs REST y bases de datos con procedimientos almacenados. Antes de la universidad trabajé como técnico de redes, así que también entiendo el lado de infraestructura. Aprendo rápido, trabajo bien en equipo y me interesa seguir construyendo cosas completas, no solo prototipos.</p>
+      </div>
+
+      <div class="split-col" id="contacto">
+        <h2>contact --info</h2>
+        <p class="lede">¿Buscas a alguien para pasantía, proyecto o colaboración? Aquí está mi info directa.</p>
+
+        <dl class="contact-list">
+          <div class="contact-row">
+            <dt>correo:</dt>
+            <dd><a href="mailto:anthony.artavia20@gmail.com">anthony.artavia20@gmail.com</a></dd>
+          </div>
+          <div class="contact-row">
+            <dt>github:</dt>
+            <dd><a href="https://github.com/AnthonyArtavia20" target="_blank" rel="noopener">github.com/AnthonyArtavia20</a></dd>
+          </div>
+          <div class="contact-row">
+            <dt>linkedin:</dt>
+            <dd><a href="https://www.linkedin.com/in/anthonyartavia/" target="_blank" rel="noopener">linkedin.com/in/anthonyartavia</a></dd>
+          </div>
+        </dl>
+
+        <a class="cv-card" href="cv.pdf" download>
+          <span class="cv-icon">↓</span>
+          <span class="cv-text">
+            <span class="cv-title">Descargar CV</span>
+            <span class="cv-sub">PDF · actualizado 2026</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <h2>ls proyectos/</h2>
+
+      <div class="projects-grid">
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">vitals</span>
+          <span class="project-tag">C · Linux</span>
+        </div>
+        <p>Monitor de sistema para Linux escrito en C: CPU, memoria, procesos y demás métricas en tiempo real, directo desde la terminal. Proyecto personal para profundizar en programación de sistemas.</p>
+        <div class="links">
+          <a href="#" target="_blank">github →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">F1 Garage Manager</span>
+          <span class="project-tag">React · Node/Express · SQL Server · Docker</span>
+        </div>
+        <p>Sistema full-stack de gestión para un equipo de F1, hecho para el curso de Bases de Datos. Autenticación por roles, CRUD de equipos/autos/inventario, procedimientos almacenados y transacciones para reglas de negocio, un motor de simulación de carreras y un dashboard de analítica en Grafana.</p>
+        <div class="links">
+          <a href="#" target="_blank">github →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">Genetic Kingdom</span>
+          <span class="project-tag">C++</span>
+        </div>
+        <p>Tower-defense hecho para el curso de Algoritmos y Estructuras de Datos II. Combina pathfinding con algoritmos genéticos/evolutivos para controlar el comportamiento de los enemigos.</p>
+        <div class="links">
+          <a href="#" target="_blank">github →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">Conveyor Belt Image Analyzer</span>
+          <span class="project-tag">Python · JavaScript · C#</span>
+        </div>
+        <p>Sistema de clasificación de imágenes que identifica tomates y papas sobre una banda transportadora y activa el mecanismo físico de separación para clasificarlos en distintos contenedores.</p>
+        <div class="links">
+          <a href="#" target="_blank">github →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">DonCEy Kong Jr.</span>
+          <span class="project-tag">Java · C/Raylib</span>
+        </div>
+        <p>Juego multijugador con arquitectura cliente-servidor para el curso de Paradigmas de Programación: servidor en Java, cliente en C con Raylib.</p>
+        <div class="links">
+          <a href="#" target="_blank">github →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">BusCEMinas</span>
+          <span class="project-tag">Racket</span>
+        </div>
+        <p>Implementación de Buscaminas con programación funcional, explorando Racket y los paradigmas funcionales en el curso de Paradigmas de Programación.</p>
+        <div class="links">
+          <a href="#" target="_blank">github →</a>
+        </div>
+      </div>
+
+      </div>
+    </section>
+
+    <section id="experiencia-educacion" class="split">
+      <div class="split-col" id="experiencia">
+      <h2>tail -f experiencia.log</h2>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-content">
+            <div class="tl-head">
+              <span class="tl-role">Asistente de laboratorio — Química General</span>
+              <span class="tl-date">2024 – 2026</span>
+            </div>
+            <span class="tl-org">Tecnológico de Costa Rica</span>
+            <p>Apoyo a estudiantes durante sesiones de laboratorio; revisión y calificación de reportes y evaluaciones.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-content">
+            <div class="tl-head">
+              <span class="tl-role">Pasantía técnica</span>
+              <span class="tl-date">Oct – Dic 2022</span>
+            </div>
+            <span class="tl-org">Universidad Estatal a Distancia (UNED)</span>
+            <p>Mantenimiento y troubleshooting de equipo de cómputo, configuración de redes, elaboración de documentación técnica y apoyo en la instrucción de un curso de robótica.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="split-col" id="educacion">
+      <h2>cat educacion.md</h2>
+      <div class="edu-item">
+        <div class="tl-head">
+          <span class="tl-role">Ingeniería en Computadores (en curso)</span>
+          <span class="tl-date">2024 – presente</span>
+        </div>
+        <span class="tl-org">Tecnológico de Costa Rica, Cartago</span>
+      </div>
+      <div class="edu-item">
+        <div class="tl-head">
+          <span class="tl-role">Técnico en Redes de Computadoras</span>
+          <span class="tl-date">2017 – 2022</span>
+        </div>
+        <span class="tl-org">CTP Fernando Volio Jiménez, Quebradilla, Cartago</span>
+      </div>
+      <p class="certs">
+        <span class="key">certificaciones:</span> Cisco CCNA 1 · IT Essentials · Cybersecurity Essentials · Introduction to IoT · Linux Essentials (Linux Foundation)
+      </p>
+      <p class="certs">
+        <span class="key">idiomas:</span> Español (nativo) · Inglés B2 · Alemán A1
+      </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>cat skills.txt</h2>
+      <div class="skills-grid">
+        <div class="skill-cat">
+          <h3>Lenguajes</h3>
+          <ul>
+            <li>Python</li>
+            <li>C / C++</li>
+            <li>Java</li>
+            <li>C#</li>
+            <li>TypeScript</li>
+            <li>Racket</li>
+          </ul>
+        </div>
+        <div class="skill-cat">
+          <h3>Web &amp; backend</h3>
+          <ul>
+            <li>React</li>
+            <li>Node.js / Express</li>
+            <li>APIs REST</li>
+            <li>.NET Framework</li>
+            <li>Tailwind CSS</li>
+          </ul>
+        </div>
+        <div class="skill-cat">
+          <h3>Bases de datos</h3>
+          <ul>
+            <li>SQL Server / MySQL</li>
+            <li>SQL &amp; NoSQL</li>
+            <li>Procedimientos almacenados</li>
+            <li>Modelado de datos</li>
+          </ul>
+        </div>
+        <div class="skill-cat">
+          <h3>Hardware &amp; sistemas digitales</h3>
+          <ul>
+            <li>Ensamblador</li>
+            <li>Verilog (básico)</li>
+            <li>Arquitectura de computadores</li>
+            <li>Diseño de circuitos digitales</li>
+          </ul>
+        </div>
+        <div class="skill-cat">
+          <h3>Redes &amp; herramientas</h3>
+          <ul>
+            <li>Git / GitHub</li>
+            <li>Linux</li>
+            <li>Docker</li>
+            <li>Grafana</li>
+            <li>Wireshark</li>
+          </ul>
+        </div>
+        <div class="skill-cat">
+          <h3>Cursando actualmente</h3>
+          <ul>
+            <li>Circuitos de Corriente Alterna</li>
+            <li>Elementos Activos</li>
+            <li>Laboratorio de Circuitos Eléctricos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      hecho a mano · desplegado con GitHub Pages
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
