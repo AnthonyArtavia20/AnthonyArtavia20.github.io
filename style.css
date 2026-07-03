@@ -1,105 +1,103 @@
 :root{
-  --bg: #14120f;
-  --bg-panel: #1b1815;
-  --line: #332e27;
-  --green: #7EE081;
-  --amber: #E8B95C;
-  --text: #F5F3EF;
-  --muted: #A39A8B;
+  --bg: #14120f;        /* fondo general de toda la página */
+  --bg-panel: #1b1815;  /* fondo de paneles/tarjetas (no se usa mucho ya, quedó de una versión vieja) */
+  --line: #332e27;      /* color de bordes/separadores sutiles en toda la página */
+  --green: #7EE081;     /* verde de acento: links, hover, brillos */
+  --amber: #E8B95C;     /* ámbar de acento: títulos de sección ($ proyectos, etc.) */
+  --text: #F5F3EF;      /* color de texto principal (blanco hueso) */
+  --muted: #A39A8B;     /* color de texto secundario/gris, para lo menos importante */
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth; font-size:15px;}
+*{margin:0;padding:0;box-sizing:border-box;} /* reset clásico: sin márgenes por defecto del navegador, y box-sizing:border-box para que padding/border no sumen al ancho declarado */
+html{scroll-behavior:smooth; font-size:15px;} /* scroll-behavior:smooth = los saltos por ancla (#seccion) se animan en vez de ser instantáneos; font-size:15px = tamaño base del que parten todos los "rem" del archivo */
 body{
   background:var(--bg);
   color:var(--text);
   font-family:'Inter', sans-serif;
-  line-height:1.55;
+  line-height:1.55;     /* espacio entre líneas, más legible que el 1.2 por defecto */
   position:relative;
-  overflow-x:hidden;
+  overflow-x:hidden;    /* evita scroll horizontal si algo se desborda un poco (ej. los split-col con margin negativo) */
 }
-.mono{font-family:'JetBrains Mono', monospace;}
-a{color:var(--green); text-decoration:none;}
-a:hover{text-decoration:underline;}
-::selection{background:var(--green); color:#0d0c0a;}
-a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+.mono{font-family:'JetBrains Mono', monospace;} /* clase utilitaria por si se necesita fuente monoespaciada suelta en algún lado */
+a{color:var(--green); text-decoration:none;} /* todos los links, sin subrayado por defecto */
+a:hover{text-decoration:underline;} /* subrayado solo al pasar el mouse */
+::selection{background:var(--green); color:#0d0c0a;} /* color del texto cuando el usuario lo selecciona/arrastra con el mouse */
+a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;} /* accesibilidad: borde visible al navegar con teclado (Tab), no al hacer click con mouse */
 
-/* ---- decorated background: faint grid + ambient glows ---- */
-.bg-grid{
-  position:fixed; inset:0; z-index:-2;
+.bg-grid{/* ---- fondo decorado: grilla tenue + resplandores ambientales ---- */
+  position:fixed; inset:0; z-index:-2; /* fixed+inset:0 = cubre toda la pantalla; z-index:-2 = queda detrás de todo el contenido */
   background-image:
-    linear-gradient(to right, rgba(245,243,239,0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(245,243,239,0.035) 1px, transparent 1px);
-  background-size:42px 42px;
-  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+    linear-gradient(to right, rgba(245,243,239,0.035) 1px, transparent 1px),   /* líneas verticales de la malla */
+    linear-gradient(to bottom, rgba(245,243,239,0.035) 1px, transparent 1px);  /* líneas horizontales de la malla */
+  background-size:42px 42px; /* tamaño de cada celda de la malla */
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%); /* difumina la malla hacia los bordes, para que no se vea "cortada" */
 }
 .bg-glow{
-  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  position:fixed; inset:0; z-index:-1; pointer-events:none; /* pointer-events:none = no bloquea clicks aunque esté "encima" en el DOM */
   background:
-    radial-gradient(600px 400px at 15% 8%, rgba(126,224,129,0.10), transparent 70%),
-    radial-gradient(500px 380px at 85% 30%, rgba(232,185,92,0.08), transparent 70%),
-    radial-gradient(700px 500px at 50% 90%, rgba(126,224,129,0.06), transparent 70%);
+    radial-gradient(600px 400px at 15% 8%, rgba(126,224,129,0.10), transparent 70%),  /* resplandor verde arriba-izquierda */
+    radial-gradient(500px 380px at 85% 30%, rgba(232,185,92,0.08), transparent 70%),  /* resplandor ámbar arriba-derecha */
+    radial-gradient(700px 500px at 50% 90%, rgba(126,224,129,0.06), transparent 70%); /* resplandor verde tenue abajo */
 }
 
-/* ---- nav como menú seleccionable ---- */
-nav{
-  position:sticky; top:14px; z-index:50;
-  max-width:1120px; margin:0 auto 0; padding:16px 22px;
-  display:flex; justify-content:space-between; align-items:center;
+nav{/* ---- nav como menú seleccionable ---- */
+  position:sticky; top:14px; z-index:50; /* sticky = se queda pegada al hacer scroll, flotando a 14px del borde superior */
+  max-width:1120px; margin:0 auto 0; padding:16px 22px; /* margin:0 auto = centrada horizontalmente */
+  display:flex; justify-content:space-between; align-items:center; /* brand a la izquierda, links a la derecha */
   font-family:'JetBrains Mono', monospace; font-size:0.85rem;
   color:var(--muted);
-  border:1px solid transparent;
+  border:1px solid transparent; /* transparente por defecto, para que el cambio a .is-scrolled no "salte" (ya hay un borde ahí, solo cambia de color) */
   border-radius:8px;
-  transition:background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  transition:background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease; /* anima el cambio hacia .is-scrolled en vez de que sea abrupto */
 }
-nav.is-scrolled{
-  background:linear-gradient(135deg, rgba(20,18,15,0.88) 0%, rgba(45,53,59,0.82) 100%);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+nav.is-scrolled{ /* clase que agrega script.js cuando window.scrollY > 40 */
+  background:linear-gradient(135deg, rgba(20,18,15,0.88) 0%, rgba(45,53,59,0.82) 100%); /* fondo translúcido tipo panel */
+  backdrop-filter:blur(14px); /* difumina lo que hay detrás del nav (efecto vidrio esmerilado) */
+  -webkit-backdrop-filter:blur(14px); /* misma propiedad, con prefijo para que funcione en Safari */
   border-color:var(--line);
   box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(167,192,128,0.06);
-  animation:terminal-glow 5s ease-in-out infinite;
-  padding:11px 20px;
+  animation:terminal-glow 5s ease-in-out infinite; /* mismo brillo pulsante que usa la terminal, definido más abajo */
+  padding:11px 20px; /* un poco más angosto que el estado normal, se "encoge" al hacer scroll */
 }
 nav .brand{
-  display:flex; align-items:center; gap:10px;
+  display:flex; align-items:center; gap:10px; /* ícono + bloque de texto, uno al lado del otro */
 }
 nav .brand-icon{
-  display:flex; align-items:center; justify-content:center;
+  display:flex; align-items:center; justify-content:center; /* centra el SVG dentro del cuadrito */
   width:34px; height:34px;
-  flex-shrink:0;
-  color:var(--green);
+  flex-shrink:0; /* evita que el cuadrito se achique si el texto de al lado no cabe */
+  color:var(--green); /* el SVG usa stroke="currentColor", así que hereda este verde */
   border:1px solid var(--line);
   border-radius:7px;
   background:rgba(126,224,129,0.06);
 }
-nav .brand-icon svg{width:19px; height:19px;}
+nav .brand-icon svg{width:19px; height:19px;} /* tamaño del ícono dentro del cuadrito de 34px */
 nav .brand-text{
-  display:flex; flex-direction:column;
+  display:flex; flex-direction:column; /* apila las 3 líneas (eyebrow/nombre/carrera) verticalmente */
   line-height:1.25;
 }
-nav .brand-eyebrow{
+nav .brand-eyebrow{ /* "Portafolio digital" */
   font-size:0.90rem;
   text-transform:uppercase;
-  letter-spacing:0.09em;
+  letter-spacing:0.09em; /* separa un poco las letras, look de etiqueta/label */
   color:var(--green);
   font-weight:600;
 }
-nav .brand-name{
+nav .brand-name{ /* "Anthony Artavia L." */
   font-size:1.40rem;
   font-weight:700;
   color:var(--text);
-  text-transform:none;
+  text-transform:none; /* por si hereda el uppercase de algún selector padre, se anula aquí */
   letter-spacing:normal;
 }
-nav .brand-degree{
+nav .brand-degree{ /* "Lic. Ingeniería en Computadores" */
   font-size:1.06rem;
   color:var(--muted);
   font-weight:400;
 }
-nav ul{list-style:none; display:flex; gap:4px;}
-nav li{position:relative;}
+nav ul{list-style:none; display:flex; gap:4px;} /* sin viñetas, los <li> en fila */
+nav li{position:relative;} /* por si a futuro se necesita un ::after o tooltip posicionado respecto al <li> */
 nav a{
-  display:flex; align-items:center; gap:8px;
+  display:flex; align-items:center; gap:8px; /* ícono + texto del link, uno al lado del otro */
   padding:7px 12px;
   border-radius:5px;
   color:#c9c1b1;
@@ -107,165 +105,163 @@ nav a{
   letter-spacing:0.07em;
   font-size:0.85rem;
   font-weight:500;
-  transition:color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  transition:color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease; /* anima el estado hover */
 }
 nav a .nav-icon{
   display:inline-flex;
   width:15px; height:15px;
-  color:var(--green);
-  opacity:0.75;
+  color:var(--green); /* el SVG hereda este color vía stroke="currentColor" */
+  opacity:0.75; /* un poco apagado en reposo, se aviva en hover (ver abajo) */
   transition:opacity 0.15s ease, filter 0.15s ease;
 }
-nav a .nav-icon svg{width:100%; height:100%;}
+nav a .nav-icon svg{width:100%; height:100%;} /* el SVG llena todo el espacio de su contenedor .nav-icon */
 nav a:hover, nav a:focus-visible{
-  color:var(--text);
+  color:var(--text); /* texto más brillante en hover */
   background:rgba(126,224,129,0.10);
-  box-shadow:inset 2px 0 0 var(--green);
+  box-shadow:inset 2px 0 0 var(--green); /* una rayita verde pegada al borde izquierdo, como un "cursor" de selección */
   text-decoration:none;
 }
 nav a:hover .nav-icon, nav a:focus-visible .nav-icon{
-  opacity:1;
-  filter:drop-shadow(0 0 4px rgba(126,224,129,0.6));
+  opacity:1; /* el ícono se aviva junto con el texto */
+  filter:drop-shadow(0 0 4px rgba(126,224,129,0.6)); /* leve resplandor verde alrededor del ícono */
 }
 
-@media (max-width:600px){
-  nav{top:0; border-radius:0;}
-  nav .brand-eyebrow, nav .brand-degree{display:none;}
+@media (max-width:600px){ /* Por si el sitio se abre desde un celular */
+  nav{top:0; border-radius:0;} /* pegada del todo arriba, sin esquinas redondeadas, como una barra nativa de app */
+  nav .brand-eyebrow, nav .brand-degree{display:none;} /* se ocultan para no amontonar, solo queda ícono + nombre */
 }
 
-header{max-width:1120px; margin:0 auto; padding:72px 24px 40px;}
+header{max-width:1120px; margin:0 auto; padding:72px 24px 40px;} /* contenedor de la terminal falsa, centrado igual que el nav y las secciones */
 
-/* ---- terminal: tema Everforest (dark), estilo Alacritty ---- */
+/* ---- terminal: tema Everforest (dark), estilo Alacritty configuración de mi PC para darle mi estilo a mi portafolio---- */
 .terminal{
+  /* variables de color SOLO válidas dentro de .terminal y sus hijos (scope local) */
   --ef-bg: #2d353b;
   --ef-bg1: #343f44;
   --ef-bg2: #3d484d;
-  --ef-fg: #d3c6aa;
-  --ef-red: #e67e80;
-  --ef-yellow: #dbbc7f;
-  --ef-green: #a7c080;
-  --ef-aqua: #83c092;
-  --ef-blue: #7fbbb3;
-  --ef-purple: #d699b6;
-  --ef-grey: #859289;
-  --ef-orange: #e69875;
+  --ef-fg: #d3c6aa;      /* texto principal dentro de la terminal */
+  --ef-red: #e67e80;     /* el punto rojo de la barra de la terminal */
+  --ef-yellow: #dbbc7f;  /* el punto amarillo / el "path" del prompt */
+  --ef-green: #a7c080;   /* el punto verde / acentos */
+  --ef-aqua: #83c092;    /* las "keys" de la salida (nombre:, carrera:, etc.) */
+  --ef-blue: #7fbbb3;    /* definida pero sin uso actual, disponible por si se necesita */
+  --ef-purple: #d699b6;  /* ídem, disponible */
+  --ef-grey: #859289;    /* texto secundario (título de la terminal, sesión de la statusbar) */
+  --ef-orange: #e69875;  /* el símbolo ➜ del prompt */
 
   background:var(--ef-bg);
   border:1px solid var(--ef-bg2);
   border-radius:6px;
-  overflow:hidden;
-  position:relative;
-  isolation:isolate;
+  overflow:hidden; /* recorta la imagen de fondo (::before) para que no se salga de las esquinas redondeadas */
+  position:relative; /* ancla para los pseudo-elementos ::before (wallpaper) y ::after (scanlines) */
+  isolation:isolate; /* crea un nuevo contexto de apilamiento, para que el z-index interno no choque con el resto de la página */
   box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(167,192,128,0.06);
-  animation:terminal-glow 5s ease-in-out infinite;
+  animation:terminal-glow 5s ease-in-out infinite; /* el borde/sombra se refresca cada 5s, ver @keyframes abajo */
 }
-@keyframes terminal-glow{
-  0%, 100%{ box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(167,192,128,0.06), 0 0 22px rgba(167,192,128,0.05); }
-  50%{ box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(167,192,128,0.14), 0 0 38px rgba(167,192,128,0.14); }
+@keyframes terminal-glow{ /* pulso sutil de brillo en el borde de la terminal (y del nav cuando tiene .is-scrolled) */
+  0%, 100%{ box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(167,192,128,0.06), 0 0 22px rgba(167,192,128,0.05); } /* estado "apagado" */
+  50%{ box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(167,192,128,0.14), 0 0 38px rgba(167,192,128,0.14); }     /* estado "encendido", a la mitad del ciclo */
 }
 
 /* ---- adornos de esquina estilo pista de PCB, "montando" la terminal como un chip ---- */
-.terminal-frame{position:relative;}
+.terminal-frame{position:relative;} /* ancla para posicionar los 4 SVG de esquina (position:absolute) respecto a este contenedor */
 .corner-trace{
   position:absolute;
   width:40px; height:40px;
-  pointer-events:none;
+  pointer-events:none; /* decorativo, no debe bloquear clicks */
   opacity:0.8;
   z-index:1;
-  filter:drop-shadow(0 0 3px rgba(126,224,129,0.25));
+  filter:drop-shadow(0 0 3px rgba(126,224,129,0.25)); /* leve resplandor alrededor de las líneas del SVG */
 }
 .corner-trace path{
-  stroke-dasharray:5 4;
-  animation:trace-flow 3.2s linear infinite;
+  stroke-dasharray:5 4; /* convierte la línea sólida en guiones (5px de línea, 4px de espacio) */
+  animation:trace-flow 3.2s linear infinite; /* anima el desplazamiento de esos guiones, dando sensación de flujo/corriente */
 }
-@keyframes trace-flow{ to{ stroke-dashoffset:-36; } }
-.corner-trace.tl{ top:-12px; left:-12px; }
-.corner-trace.tr{ top:-12px; right:-12px; transform:scaleX(-1); }
-.corner-trace.bl{ bottom:-12px; left:-12px; transform:scaleY(-1); }
-.corner-trace.br{ bottom:-12px; right:-12px; transform:scale(-1,-1); }
+@keyframes trace-flow{ to{ stroke-dashoffset:-36; } } /* mueve el patrón de guiones a lo largo de la línea */
+.corner-trace.tl{ top:-12px; left:-12px; }                              /* esquina superior-izquierda, tal cual */
+.corner-trace.tr{ top:-12px; right:-12px; transform:scaleX(-1); }       /* superior-derecha: mismo SVG, espejado horizontal */
+.corner-trace.bl{ bottom:-12px; left:-12px; transform:scaleY(-1); }     /* inferior-izquierda: espejado vertical */
+.corner-trace.br{ bottom:-12px; right:-12px; transform:scale(-1,-1); }  /* inferior-derecha: espejado en ambos ejes */
 
-/* ---- tablet: columnas más juntas, terminal con menos aire ---- */
-@media (max-width:900px){
-  .split{gap:36px;}
-  header{padding:56px 24px 32px;}
-  .terminal-body{min-height:220px;}
+@media (max-width:900px){ /* ---- tablet: columnas más juntas, terminal con menos aire ---- */
+  .split{gap:36px;}                 /* menos separación entre las 2 columnas (whoami/contacto, experiencia/educación) */
+  header{padding:56px 24px 32px;}   /* menos aire arriba/abajo del header en tablet */
+  .terminal-body{min-height:220px;} /* la terminal puede ser un poco menos alta */
 }
 
 @media (max-width:700px){
-  .corner-trace{display:none;}
+  .corner-trace{display:none;} /* los adornos de esquina se ocultan, no hay espacio de sobra para que se vean bien */
 }
 
-/* wallpaper del bosque, muy oscurecido, como en Alacritty real */
-.terminal::before{
+.terminal::before{/* wallpaper del bosque, como en mi config de Alacrity */
   content:"";
-  position:absolute; inset:-6px;
+  position:absolute; inset:-6px; /* un poco más grande que la terminal (-6px por lado) para que el blur no deje ver el borde real de la imagen */
   background-image:
-    linear-gradient(rgba(20,24,22,0.90), rgba(20, 24, 22, 0)),
-    url("bosque.jpg");
+    linear-gradient(rgba(20,24,22,0.90), rgba(20, 24, 22, 0)), /* capa oscura semitransparente ENCIMA de la foto, para que el texto se lea */
+    url("bosque.jpg"); /* la imagen de fondo en sí — debe estar en la misma carpeta que este CSS */
   background-size:cover;
-  background-position:center 35%;
-  filter:blur(2px) saturate(0.9);
-  z-index:0;
+  background-position:center 35%; /* qué parte de la foto se ve (35% desde arriba, no el centro exacto) */
+  filter:blur(2px) saturate(0.9); /* levemente desenfocada y menos saturada, para que no compita con el texto */
+  z-index:0; /* queda detrás del contenido real de la terminal (que tiene z-index:3) */
 }
 
-/* scanlines sutiles, look CRT/Alacritty */
-.terminal::after{
+.terminal::after{/* scanlines sutiles, look CRT/Alacritty */
   content:"";
   position:absolute; inset:0;
   pointer-events:none;
-  background:repeating-linear-gradient(
+  background:repeating-linear-gradient( /* franjas horizontales repetidas, simulando líneas de un monitor CRT viejo */
     to bottom,
     rgba(0,0,0,0.09) 0px,
     rgba(0,0,0,0.09) 1px,
     transparent 1px,
     transparent 3px
   );
-  mix-blend-mode:overlay;
+  mix-blend-mode:overlay; /* mezcla con lo que hay debajo en vez de taparlo, efecto más sutil */
   opacity:0.35;
   z-index:1;
 }
 
-.terminal-bar{
+.terminal-bar{ /* la barra superior con los 3 puntitos de colores y el título */
   display:flex; align-items:center; gap:8px;
   padding:10px 16px;
   background:rgba(52,63,68,0.55);
-  backdrop-filter:blur(4px);
+  backdrop-filter:blur(4px); /* vidrio esmerilado también acá, sutil */
   border-bottom:1px solid var(--ef-bg2);
-  position:relative; z-index:3;
+  position:relative; z-index:3; /* por encima del wallpaper (z:0) y las scanlines (z:1) */
 }
-.dot{width:11px;height:11px;border-radius:50%;}
-.dot.r{background:var(--ef-red);} .dot.y{background:var(--ef-yellow);} .dot.g{background:var(--ef-green);}
-.terminal-title{
-  margin-left:auto; margin-right:auto;
+.dot{width:11px;height:11px;border-radius:50%;} /* forma base de los 3 puntitos (círculo) */
+.dot.r{background:var(--ef-red);} .dot.y{background:var(--ef-yellow);} .dot.g{background:var(--ef-green);} /* color de cada uno */
+.terminal-title{ /* el texto "artavia@tec: ~" centrado en la barra */
+  margin-left:auto; margin-right:auto; /* truco clásico flexbox para centrar un elemento entre otros dos (los dots a la izq, nada a la derecha) */
   font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--ef-grey);
 }
-.terminal-body{
+.terminal-body{ /* el área donde "escribe" el comando y sale la info */
   padding:28px 24px 24px;
   font-family:'JetBrains Mono', monospace;
   font-size:0.92rem;
-  min-height:260px;
+  min-height:260px; /* altura mínima para que no "salte" de tamaño mientras se escribe el texto */
   color:var(--ef-fg);
   position:relative; z-index:3;
 }
-.prompt{color:var(--ef-orange, #e69875); text-shadow:0 0 8px rgba(230,152,117,0.4); font-weight:700;}
-.path{color:var(--ef-yellow);}
-#typed-cmd{color:var(--ef-fg);}
-.cursor{
+.prompt{color:var(--ef-orange, #e69875); text-shadow:0 0 8px rgba(230,152,117,0.4); font-weight:700;} /* el símbolo ➜; el segundo valor en color() es un respaldo por si --ef-orange no cargara */
+.path{color:var(--ef-yellow);} /* el "~" después del prompt */
+#typed-cmd{color:var(--ef-fg);} /* el texto del comando que se va "escribiendo" letra por letra vía JS */
+.cursor{ /* el cursor parpadeante al final del comando */
   display:inline-block; width:8px; height:1.1em;
   background:var(--ef-green);
-  box-shadow:0 0 6px rgba(167,192,128,0.65);
+  box-shadow:0 0 6px rgba(167,192,128,0.65); /* leve resplandor alrededor del cursor */
   vertical-align:text-bottom;
-  animation:blink 1s step-end infinite;
+  animation:blink 1s step-end infinite; /* parpadeo: step-end = cambia de golpe, no con transición suave, como un cursor real */
 }
-@keyframes blink{50%{opacity:0;}}
-.output-line{
+@keyframes blink{50%{opacity:0;}} /* a la mitad del ciclo se hace invisible; el resto del tiempo, visible */
+.output-line{ /* cada línea de info (nombre:, carrera:, etc.) que aparece después del comando */
   opacity:0;
-  transform:translateX(-6px);
-  animation:reveal 0.35s ease forwards;
+  transform:translateX(-6px); /* arranca un poco corrida a la izquierda... */
+  animation:reveal 0.35s ease forwards; /* ...y esta animación la trae a su posición normal mientras aparece */
 }
-@keyframes reveal{to{opacity:1; transform:translateX(0);}}
-.key{color:var(--ef-aqua);}
-.val{color:var(--ef-fg);}
+@keyframes reveal{to{opacity:1; transform:translateX(0);}} /* "forwards" en la animación de arriba hace que se quede en este estado final, no vuelva al inicio */
+.key{color:var(--ef-aqua);} /* la parte "nombre:", "carrera:", etc. de cada línea de salida */
+.val{color:var(--ef-fg);}   /* la parte del valor, ej. "Anthony Artavia Leitón" */
 
 /* ---- barra de estado inferior, estilo Zellij/powerline ---- */
 .status-bar{
@@ -275,72 +271,72 @@ header{max-width:1120px; margin:0 auto; padding:72px 24px 40px;}
   position:relative; z-index:3;
   padding:6px 0 6px 10px;
 }
-.status-seg{
+.status-seg{ /* cada "segmento" de la barra: everforest(artavia) / NORMAL / Tab #1 */
   padding:4px 16px 4px 12px;
-  clip-path:polygon(0 0, calc(100% - 9px) 0, 100% 50%, calc(100% - 9px) 100%, 0 100%);
-  white-space:nowrap;
+  clip-path:polygon(0 0, calc(100% - 9px) 0, 100% 50%, calc(100% - 9px) 100%, 0 100%); /* recorta el rectángulo en una flecha/punta hacia la derecha, estilo powerline */
+  white-space:nowrap; /* que el texto del segmento no se parta en dos líneas */
   font-weight:600;
 }
-.status-session{background:rgba(211,198,170,0.14); color:var(--ef-grey);}
-.status-mode{background:var(--ef-green); color:var(--ef-bg); margin-left:-10px; z-index:1;}
-.status-tab{background:var(--ef-yellow); color:var(--ef-bg); margin-left:-10px; z-index:2;}
+.status-session{background:rgba(211,198,170,0.14); color:var(--ef-grey);}                          /* "everforest (artavia)" */
+.status-mode{background:var(--ef-green); color:var(--ef-bg); margin-left:-10px; z-index:1;}         /* "NORMAL"; margin negativo hace que la punta de flecha se meta debajo del siguiente segmento */
+.status-tab{background:var(--ef-yellow); color:var(--ef-bg); margin-left:-10px; z-index:2;}         /* "Tab #1" */
 
-@media (prefers-reduced-motion: reduce){
-  .terminal{animation:none;}
-  .terminal::after{display:none;}
-  .cursor{animation:none;}
-  .output-line{opacity:1; transform:none; animation:none;}
-  .corner-trace path{animation:none;}
+@media (prefers-reduced-motion: reduce){ /* En caso de que el usuario tenga en su sistema operativo que hayan menos animaciones o menos movimiento(accesibilidad) */
+  .terminal{animation:none;}          /* sin el pulso de brillo */
+  .terminal::after{display:none;}     /* sin scanlines animadas */
+  .cursor{animation:none;}            /* cursor fijo, sin parpadeo */
+  .output-line{opacity:1; transform:none; animation:none;} /* la info aparece de una vez, sin efecto de entrada */
+  .corner-trace path{animation:none;} /* las líneas de PCB no "fluyen" */
 }
 
 /* ---- resaltado al llegar a una sección desde el nav ---- */
 /* Se aplica por JS (section-flash) al elemento destino justo después del scroll.
-   Parpadea 2 veces (contorno + fondo tenue) y el texto del h2 acompaña el pulso;
-   además hay un barrido de luz de arriba a abajo, una sola pasada, como un "scan". */
+  Parpadea 2 veces (contorno + fondo tenue) y el texto del h2 acompaña el pulso;
+  además hay un barrido de luz de arriba a abajo, una sola pasada, como un "scan". */
 .section-flash{
-  position:relative;
+  position:relative; /* necesario para que el ::before (el barrido) se posicione respecto a este elemento y no a otro */
   border-radius:14px;
-  animation:section-pulse 0.65s ease-in-out 2;
+  animation:section-pulse 0.65s ease-in-out 2; /* el "2" al final = se repite 2 veces (2 parpadeos) y termina en el estado inicial */
 }
 @keyframes section-pulse{
-  0%, 100%{
+  0%, 100%{ /* estado "apagado": sin contorno ni fondo */
     box-shadow:inset 0 0 0 0 rgba(126,224,129,0), 0 0 0 0 rgba(126,224,129,0);
     background-color:transparent;
   }
-  50%{
-    box-shadow:inset 0 0 0 2px rgba(126,224,129,0.55), 0 0 40px rgba(126,224,129,0.22);
-    background-color:rgba(126,224,129,0.045);
+  50%{ /* estado "encendido", a la mitad de cada parpadeo */
+    box-shadow:inset 0 0 0 2px rgba(126,224,129,0.55), 0 0 40px rgba(126,224,129,0.22); /* contorno interno + resplandor externo */
+    background-color:rgba(126,224,129,0.045); /* fondo verde muy tenue */
   }
 }
 .section-flash h2{
-  animation:heading-pulse 0.65s ease-in-out 2;
+  animation:heading-pulse 0.65s ease-in-out 2; /* mismo timing que section-pulse, para que vayan sincronizados */
 }
 @keyframes heading-pulse{
-  0%, 100%{ color:var(--amber); text-shadow:none; }
-  50%{ color:var(--green); text-shadow:0 0 14px rgba(126,224,129,0.65); }
+  0%, 100%{ color:var(--amber); text-shadow:none; }                                        /* color normal del título */
+  50%{ color:var(--green); text-shadow:0 0 14px rgba(126,224,129,0.65); }                   /* cambia a verde con resplandor durante el pulso */
 }
 /* barrido único, de arriba hacia abajo, superpuesto sobre la sección */
 .section-flash::before{
   content:"";
-  position:absolute; inset:0;
+  position:absolute; inset:0; /* cubre exactamente el área del elemento con .section-flash */
   pointer-events:none;
-  border-radius:inherit;
-  background:linear-gradient(to bottom, transparent 0%, rgba(126,224,129,0.16) 45%, transparent 90%);
-  background-size:100% 220%;
-  background-position:0 -120%;
-  animation:section-scan 1.3s ease-out 1;
+  border-radius:inherit; /* copia el border-radius del padre, para que no se salga de las esquinas redondeadas */
+  background:linear-gradient(to bottom, transparent 0%, rgba(126,224,129,0.16) 45%, transparent 90%); /* una franja de luz horizontal dentro de un gradiente más grande */
+  background-size:100% 220%;   /* el gradiente es más alto que el propio elemento... */
+  background-position:0 -120%; /* ...y arranca posicionado por encima, fuera de vista */
+  animation:section-scan 1.3s ease-out 1; /* una sola pasada (el "1" al final) */
 }
 @keyframes section-scan{
-  0%{ background-position:0 -120%; opacity:0; }
-  12%{ opacity:1; }
-  100%{ background-position:0 120%; opacity:0; }
+  0%{ background-position:0 -120%; opacity:0; }  /* arranca arriba, invisible */
+  12%{ opacity:1; }                                /* se hace visible casi de inmediato */
+  100%{ background-position:0 120%; opacity:0; }  /* termina abajo, invisible de nuevo */
 }
 
 @media (prefers-reduced-motion: reduce){
-  .section-flash, .section-flash h2, .section-flash::before{ animation:none; }
+  .section-flash, .section-flash h2, .section-flash::before{ animation:none; } /* sin nada de esto si el usuario pidió menos movimiento */
 }
 
-section{max-width:1120px; margin:0 auto; padding:26px 24px; position:relative;}
+section{max-width:1120px; margin:0 auto; padding:26px 24px; position:relative;} /* contenedor base de cada sección; position:relative sirve de ancla para .section-flash::before cuando el target ES la sección */
 section h2{
   font-family:'JetBrains Mono', monospace;
   font-size:1rem;
@@ -348,14 +344,14 @@ section h2{
   letter-spacing:0.02em;
   margin-bottom:28px;
 }
-section h2::before{content:"$ "; color:var(--muted);}
+section h2::before{content:"$ "; color:var(--muted);} /* agrega el "$ " antes de cada título (ls proyectos/, cat skills.txt, etc.) sin tener que escribirlo en el HTML */
 
-.lede{font-size:1.15rem; color:var(--text); max-width:640px;}
-.lede + p{margin-top:16px; color:var(--muted); max-width:640px;}
+.lede{font-size:1.15rem; color:var(--text); max-width:640px;} /* el primer párrafo, más grande/destacado que el resto */
+.lede + p{margin-top:16px; color:var(--muted); max-width:640px;} /* el selector "+" apunta al párrafo que viene JUSTO después de un .lede */
 
 .projects-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); /* tantas columnas de mínimo 260px como quepan, repartiendo el espacio sobrante */
   gap:18px;
 }
 .project{
@@ -364,125 +360,124 @@ section h2::before{content:"$ "; color:var(--muted);}
   padding:22px;
   background:rgba(27,24,21,0.7);
   backdrop-filter:blur(6px);
-  transition:border-color 0.15s ease, transform 0.15s ease;
+  transition:border-color 0.15s ease, transform 0.15s ease; /* anima el hover */
   display:flex;
-  flex-direction:column;
-  height:100%;
+  flex-direction:column; /* para que .links (con margin-top:auto) se pueda empujar hasta abajo de la tarjeta */
+  height:100%; /* todas las tarjetas de una fila quedan de la misma altura (el grid ya las iguala, esto asegura que el contenido interno también llene ese alto) */
 }
-.project:hover{border-color:var(--green); transform:translateY(-2px);}
-.project-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
+.project:hover{border-color:var(--green); transform:translateY(-2px);} /* se "levanta" un poco al pasar el mouse */
+.project-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;} /* nombre a la izq, tag de tecnologías a la derecha */
 .project-name{font-family:'JetBrains Mono', monospace; font-weight:700; font-size:1rem;}
-.project-tag{font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--green); border:1px solid var(--line); padding:2px 8px; border-radius:100px;}
+.project-tag{font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--green); border:1px solid var(--line); padding:2px 8px; border-radius:100px;} /* border-radius:100px = forma de píldora */
 .project p{
   margin-top:10px; color:var(--muted); font-size:0.92rem;
-  /* Support for standard and WebKit line clamping */
-  line-clamp: 4;
+  line-clamp: 4;/* recorta la descripción a un máximo de 4 líneas y agrega "..." si sobra texto (line-clamp es el estándar nuevo, -webkit- es el que en verdad soportan los navegadores hoy) */
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.project .links{margin-top:auto; padding-top:14px; font-family:'JetBrains Mono', monospace; font-size:0.85rem;}
+.project .links{margin-top:auto; padding-top:14px; font-family:'JetBrains Mono', monospace; font-size:0.85rem;} /* margin-top:auto empuja este bloque hasta el fondo de la tarjeta flex */
 .project .links a{margin-right:16px;}
 
 @media (max-width:600px){
-  .projects-grid{grid-template-columns:1fr;}
+  .projects-grid{grid-template-columns:1fr;} /* una sola columna en celular, sin importar el auto-fill de arriba */
 }
 
-.skills-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px;}
+.skills-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px;} /* auto-fit = igual que auto-fill pero además estira las columnas si sobra espacio */
 .skill-cat h3{font-family:'JetBrains Mono', monospace; font-size:0.85rem; color:var(--muted); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.05em;}
 .skill-cat ul{list-style:none;}
 .skill-cat li{padding:4px 0; font-size:0.95rem;}
-.skill-cat li::before{content:"▸ "; color:var(--green);}
+.skill-cat li::before{content:"▸ "; color:var(--green);} /* viñeta personalizada en vez del punto/círculo por defecto de <li> */
 
-/* ---- experience timeline ---- */
-.timeline{position:relative; padding-left:28px; border-left:1px solid var(--line);}
-.tl-item{position:relative; padding-bottom:32px;}
-.tl-item:last-child{padding-bottom:0;}
-.tl-marker{
-  position:absolute; left:-33px; top:4px;
+/* ---- línea de tiempo de experiencia ---- */
+.timeline{position:relative; padding-left:28px; border-left:1px solid var(--line);} /* la línea vertical de la que "cuelgan" los eventos */
+.tl-item{position:relative; padding-bottom:32px;} /* ancla para el .tl-marker (el puntito) de cada evento */
+.tl-item:last-child{padding-bottom:0;} /* el último evento no necesita espacio extra debajo */
+.tl-marker{ /* el puntito verde sobre la línea vertical, marcando cada evento */
+  position:absolute; left:-33px; top:4px; /* lo saca del flujo normal y lo pone encima de la línea (que está a la izquierda del padding) */
   width:9px; height:9px; border-radius:50%;
   background:var(--green);
-  box-shadow:0 0 0 4px rgba(126,224,129,0.12);
+  box-shadow:0 0 0 4px rgba(126,224,129,0.12); /* un halo suave alrededor del punto */
 }
-.tl-head{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:baseline;}
+.tl-head{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:baseline;} /* rol a la izq, fecha a la derecha */
 .tl-role{font-family:'JetBrains Mono', monospace; font-weight:700; font-size:1rem;}
 .tl-date{font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--muted);}
 .tl-org{display:block; font-family:'JetBrains Mono', monospace; font-size:0.82rem; color:var(--green); margin-top:4px;}
 .tl-content p{margin-top:8px; color:var(--muted); max-width:600px;}
 
-/* ---- education ---- */
+/* ---- educación ---- */
 .edu-item{
-  padding:16px 0; border-bottom:1px solid var(--line);
+  padding:16px 0; border-bottom:1px solid var(--line); /* cada entrada de educación separada por una línea abajo */
 }
-.edu-item:first-of-type{border-top:1px solid var(--line);}
+.edu-item:first-of-type{border-top:1px solid var(--line);} /* el primero además tiene línea arriba, para "cerrar" el bloque */
 .certs{
   margin-top:16px; font-family:'JetBrains Mono', monospace; font-size:0.85rem; color:var(--muted);
   max-width:640px; line-height:1.7;
 }
-.certs .key{color:var(--amber);}
+.certs .key{color:var(--amber);} /* la palabra "certificaciones:" / "idiomas:" en ámbar, distinto del .key de la terminal (que es aqua) */
 
 /* ---- whoami + contacto en dos columnas, lado a lado ---- */
 .split{
   display:grid;
-  grid-template-columns:1.1fr 0.9fr;
+  grid-template-columns:1.1fr 0.9fr; /* columna izquierda un poco más ancha que la derecha */
   gap:56px;
 }
 .split-col{
   /* Truco: padding + margin negativo del mismo valor se cancelan visualmente
-     (el texto queda exactamente donde estaba), pero el "cuadro" real del
-     elemento (el que usa .section-flash para el contorno/scan) queda más
-     grande alrededor del texto — igual de simétrico que en las secciones
-     normales, que tienen su propio padding de sobra. */
+      (el texto queda exactamente donde estaba), pero el "cuadro" real del
+      elemento (el que usa .section-flash para el contorno/scan) queda más
+      grande alrededor del texto — igual de simétrico que en las secciones
+      normales, que tienen su propio padding de sobra. */
   padding:28px 24px;
   margin:-28px -24px;
 }
-.split-col h2{margin-bottom:20px;}
-.split-col .lede{max-width:none;}
+.split-col h2{margin-bottom:20px;} /* un poco menos separación que el margin-bottom:28px por defecto de section h2 */
+.split-col .lede{max-width:none;} /* dentro de una columna angosta no hace falta limitar el ancho del texto a 640px */
 .split-col p{max-width:none;}
 
 @media (max-width:800px){
-  .split{grid-template-columns:1fr; gap:48px;}
+  .split{grid-template-columns:1fr; gap:48px;} /* las 2 columnas se apilan en una sola columna en pantallas angostas */
 }
 
-/* ---- contact: direct info instead of link row ---- */
+/* ---- contacto: info directa en vez de solo links sueltos ---- */
 .contact-list{margin-top:24px; border-top:1px solid var(--line);}
 .contact-row{
   display:flex; gap:18px; align-items:baseline;
-  padding:14px 0; border-bottom:1px solid var(--line);
+  padding:14px 0; border-bottom:1px solid var(--line); /* cada fila (correo/github/linkedin) separada por una línea */
   font-family:'JetBrains Mono', monospace; font-size:0.95rem;
 }
-.contact-row dt{color:var(--muted); min-width:90px;}
-.contact-row dd a{color:var(--text); word-break:break-all;}
+.contact-row dt{color:var(--muted); min-width:90px;} /* la etiqueta ("correo:", "github:"...), ancho mínimo para que todos los valores queden alineados */
+.contact-row dd a{color:var(--text); word-break:break-all;} /* word-break evita que un email/link largo se desborde del contenedor */
 .contact-row dd a:hover{color:var(--green);}
 
-/* ---- CV card: translucent rectangle, links to file, downloads ---- */
+/* ---- tarjeta de CV: rectángulo translúcido que enlaza al archivo y lo descarga ---- */
 .cv-card{
   margin-top:28px;
-  display:flex; align-items:center; gap:16px;
+  display:flex; align-items:center; gap:16px; /* ícono + texto, uno al lado del otro */
   padding:18px 22px;
   border:1px solid var(--line);
   border-radius:10px;
   background:rgba(126,224,129,0.06);
   backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px); /* prefijo para Safari */
   max-width:340px;
   transition:border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
 }
 .cv-card:hover{
   border-color:var(--green);
   background:rgba(126,224,129,0.10);
-  transform:translateY(-2px);
-  text-decoration:none;
+  transform:translateY(-2px); /* se levanta un poco, igual que las tarjetas de proyecto */
+  text-decoration:none; /* por si el navegador quisiera subrayar el <a> completo al hacer hover */
 }
-.cv-icon{
+.cv-icon{ /* el círculo con la flecha ↓ */
   font-family:'JetBrains Mono', monospace;
   font-size:1.2rem; color:var(--green);
   width:34px; height:34px;
-  display:flex; align-items:center; justify-content:center;
+  display:flex; align-items:center; justify-content:center; /* centra la flecha dentro del cuadro */
   border:1px solid var(--line); border-radius:8px;
 }
-.cv-text{display:flex; flex-direction:column;}
+.cv-text{display:flex; flex-direction:column;} /* apila "Descargar CV" y "PDF · actualizado 2026" */
 .cv-title{font-family:'JetBrains Mono', monospace; font-weight:700; color:var(--text); font-size:0.95rem;}
 .cv-sub{font-family:'JetBrains Mono', monospace; font-size:0.75rem; color:var(--muted); margin-top:2px;}
 
@@ -492,32 +487,32 @@ footer{
   border-top:1px solid var(--line); margin-top:40px;
 }
 
-@media (max-width:600px){
+@media (max-width:600px){ /* celular */
   nav ul{gap:14px; font-size:0.78rem;}
   header{padding:44px 16px 24px;}
-  section{padding:22px 18px;}
+  section{padding:22px 18px;} /* menos padding que en escritorio (26px 24px), para aprovechar mejor el ancho angosto */
   .terminal-body{font-size:0.8rem; padding:20px 16px;}
-  .contact-row{flex-direction:column; gap:4px;}
+  .contact-row{flex-direction:column; gap:4px;} /* etiqueta y valor en líneas separadas, en vez de en fila */
 
   /* el mismo truco de padding+margin negativo, pero con menos aire,
      para que no se salga del padding (ahora más chico) de la sección */
   .split-col{padding:18px 14px; margin:-18px -14px;}
 
-  .status-bar{flex-wrap:wrap; row-gap:4px;}
-  .status-seg{clip-path:none; border-radius:4px; margin-left:4px !important;}
+  .status-bar{flex-wrap:wrap; row-gap:4px;} /* los segmentos de la statusbar pueden pasar a una segunda línea si no caben */
+  .status-seg{clip-path:none; border-radius:4px; margin-left:4px !important;} /* sin la forma de flecha (no luce bien envuelta en 2 líneas), rectángulos normales en su lugar */
 
-  .cv-card{max-width:100%;}
+  .cv-card{max-width:100%;} /* ocupa todo el ancho disponible en vez de quedar angosta */
 }
 
-@media (max-width:480px){
-  nav{flex-wrap:wrap; row-gap:10px; justify-content:center; padding:12px 14px;}
-  nav .brand{flex:0 0 100%; justify-content:center;}
+@media (max-width:480px){ /* celular chico */
+  nav{flex-wrap:wrap; row-gap:10px; justify-content:center; padding:12px 14px;} /* el nav pasa a 2 filas si no cabe todo en una */
+  nav .brand{flex:0 0 100%; justify-content:center;} /* el brand ocupa toda la fila de arriba y queda centrado */
   nav ul{justify-content:center; flex-wrap:wrap; gap:2px;}
-  nav a{padding:6px 9px; font-size:0.7rem;}
-  nav a .nav-icon{width:13px; height:13px;}
+  nav a{padding:6px 9px; font-size:0.7rem;} /* links más compactos */
+  nav a .nav-icon{width:13px; height:13px;} /* íconos más chicos */
 
   .terminal-title{display:none;} /* con 3 dots ya se entiende que es una terminal, no hace falta el texto en tan poco espacio */
-  .prompt, .path{font-size:0.85rem;}
+  .prompt, .path{font-size:0.85rem;} /* un poco más chico para que quepa mejor junto al comando escrito */
 
-  .project-head{flex-direction:column; align-items:flex-start; gap:6px;}
+  .project-head{flex-direction:column; align-items:flex-start; gap:6px;} /* nombre y tag del proyecto en líneas separadas en vez de en fila */
 }

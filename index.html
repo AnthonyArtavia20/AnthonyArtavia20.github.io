@@ -4,13 +4,12 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Portafolio Anthony Artavia </title>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.googleapis.com"> <!--Falta agregar ícono de la página-->
       <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="style.css">
     </head>
 
   <body>
-
     <div class="bg-grid" aria-hidden="true"></div>
     <div class="bg-glow" aria-hidden="true"></div>
 
@@ -36,7 +35,7 @@
       </ul>
     </nav>
 
-    <header> <!--terminal que presenta mi información-->
+    <header> <!--Programación de la terminal que presenta mi información-->
       <div class="terminal-frame">
         <svg class="corner-trace tl" viewBox="0 0 48 48" aria-hidden="true">
           <path d="M6 32 L6 17 L17 6 L32 6" fill="none" stroke="var(--ef-green,#a7c080)" stroke-width="2"/>
@@ -77,27 +76,26 @@
       </div>
     </header>
 
-    <section id="about-contact" class="split">
+    <section id="about-contact" class="split">  <!-- Información a desplegar sobre mi -->
       <div class="split-col">
-        <h2>whoami</h2> <!-- Información a desplegar -->
+        <h2>whoami</h2>
         <p class="lede">Anthony Artavia Leitón — Estudiante de Ingeniería en Computadores en el TEC, con base sólida en programación, algoritmos y sistemas digitales (Electrónica), y experiencia previa como técnico en redes.</p>
         <p>Durante mi camino en la universidad he adquirido diversas habilidades en mi campo,
           desde lo fundamental de la programación como algoritmos y estructuras de datos además de
           conocimientos en lenguajes de muy bajo nivel como ensamblador racket, prolog y otros similares,
           también Bases de Datos desde la creación hasta el poder hacer conexiones con una web con backend
           y frontend que hagan consultas a la misma. Pero también he ido adquiriendo destrezas en el área
-          de la electrónica, puiendo crear proyectos físicos que suplan las necesidades de una empresa o
-          cliente tal como una cinta transportadora separado de tomates con un modelo de inteligencia
-          artificial, ¡podrás ver y leer más sobre este proyecto bajo!<br><br></br>Actualmente en mis
+          de la electrónica, pudiendo crear proyectos físicos que suplan las necesidades de una empresa o
+          cliente tal como una cinta transportadora separadora de tomates con un modelo de inteligencia
+          artificial ¡Podrás ver y leer más sobre este proyecto bajo!<br><br></br>Actualmente en mis
           estudios ya estoy comenzado a rozar el diseño de circuitos y los conceptos de arquitectura de
           computadoras enfocado al Diseño y calidad de productos tecnológicos. <br>Tuve la oportunidad de hacer uso de mis conocimientos técnicos en técnico en redes de telecomunicaciones durante una pasantía en la Universidad Estatal a Distancia (UNED)</br></br>
         </p>
       </div>
 
-      <div class="split-col" id="contacto">
+      <div class="split-col" id="contacto">  <!-- Columna solo para información de contacto -->
         <h2>contact --info</h2>
         <p class="lede">¿Buscas a alguien para pasantía, proyecto o colaboración? Aquí está mi info directa.</p>
-
         <dl class="contact-list">
           <div class="contact-row">
             <dt>correo:</dt>
@@ -112,8 +110,7 @@
             <dd><a href="https://www.linkedin.com/in/anthonyartavia/" target="_blank" rel="noopener">linkedin.com/in/anthonyartavia</a></dd>
           </div>
         </dl>
-
-        <a class="cv-card" href="cv.pdf" download>
+        <a class="cv-card" href="CV_Anthony_José_Artavia_LeitónATS.pdf" download> <!-- Descarga del PDF con mi CV -->
           <span class="cv-icon">↓</span>
           <span class="cv-text">
             <span class="cv-title">Descargar CV</span>
@@ -123,134 +120,131 @@
       </div>
     </section>
 
-    <section id="proyectos">
+    <section id="proyectos">  <!-- Container que tiene toda la malla de proyectos -->
       <h2>ls proyectos/</h2>
 
-      <div class="projects-grid">
+      <div class="projects-grid"> <!---->
+          <div class="project">
+            <div class="project-head">
+              <span class="project-name">vitals</span>
+              <span class="project-tag">C · Linux</span>
+            </div>
+            <p>Monitor de sistema para Linux escrito en C: CPU, memoria, procesos y demás métricas en tiempo real, directo desde la terminal. Proyecto personal para profundizar en programación de sistemas.</p>
+            <div class="links">
+              <a href="#" target="_blank">github →</a>
+            </div>
+          </div>
 
-      <div class="project">
-        <div class="project-head">
-          <span class="project-name">vitals</span>
-          <span class="project-tag">C · Linux</span>
+        <div class="project">
+          <div class="project-head">
+            <span class="project-name">F1 Garage Manager</span>
+            <span class="project-tag">React · Node/Express · SQL Server · Docker</span>
+          </div>
+          <p>Sistema full-stack de gestión para un equipo de F1, hecho para el curso de Bases de Datos. Autenticación por roles, CRUD de equipos/autos/inventario, procedimientos almacenados y transacciones para reglas de negocio, un motor de simulación de carreras y un dashboard de analítica en Grafana.</p>
+          <div class="links">
+            <a href="#" target="_blank">github →</a>
+          </div>
         </div>
-        <p>Monitor de sistema para Linux escrito en C: CPU, memoria, procesos y demás métricas en tiempo real, directo desde la terminal. Proyecto personal para profundizar en programación de sistemas.</p>
-        <div class="links">
-          <a href="#" target="_blank">github →</a>
-        </div>
-      </div>
 
-      <div class="project">
-        <div class="project-head">
-          <span class="project-name">F1 Garage Manager</span>
-          <span class="project-tag">React · Node/Express · SQL Server · Docker</span>
+        <div class="project">
+          <div class="project-head">
+            <span class="project-name">Genetic Kingdom</span>
+            <span class="project-tag">C++</span>
+          </div>
+          <p>Tower-defense hecho para el curso de Algoritmos y Estructuras de Datos II. Combina pathfinding con algoritmos genéticos/evolutivos para controlar el comportamiento de los enemigos.</p>
+          <div class="links">
+            <a href="#" target="_blank">github →</a>
+          </div>
         </div>
-        <p>Sistema full-stack de gestión para un equipo de F1, hecho para el curso de Bases de Datos. Autenticación por roles, CRUD de equipos/autos/inventario, procedimientos almacenados y transacciones para reglas de negocio, un motor de simulación de carreras y un dashboard de analítica en Grafana.</p>
-        <div class="links">
-          <a href="#" target="_blank">github →</a>
-        </div>
-      </div>
 
-      <div class="project">
-        <div class="project-head">
-          <span class="project-name">Genetic Kingdom</span>
-          <span class="project-tag">C++</span>
+        <div class="project">
+          <div class="project-head">
+            <span class="project-name">Conveyor Belt Image Analyzer</span>
+            <span class="project-tag">Python · JavaScript · C#</span>
+          </div>
+          <p>Sistema de clasificación de imágenes que identifica tomates y papas sobre una banda transportadora y activa el mecanismo físico de separación para clasificarlos en distintos contenedores.</p>
+          <div class="links">
+            <a href="#" target="_blank">github →</a>
+          </div>
         </div>
-        <p>Tower-defense hecho para el curso de Algoritmos y Estructuras de Datos II. Combina pathfinding con algoritmos genéticos/evolutivos para controlar el comportamiento de los enemigos.</p>
-        <div class="links">
-          <a href="#" target="_blank">github →</a>
-        </div>
-      </div>
 
-      <div class="project">
-        <div class="project-head">
-          <span class="project-name">Conveyor Belt Image Analyzer</span>
-          <span class="project-tag">Python · JavaScript · C#</span>
+        <div class="project">
+          <div class="project-head">
+            <span class="project-name">DonCEy Kong Jr.</span>
+            <span class="project-tag">Java · C/Raylib</span>
+          </div>
+          <p>Juego multijugador con arquitectura cliente-servidor para el curso de Paradigmas de Programación: servidor en Java, cliente en C con Raylib.</p>
+          <div class="links">
+            <a href="#" target="_blank">github →</a>
+          </div>
         </div>
-        <p>Sistema de clasificación de imágenes que identifica tomates y papas sobre una banda transportadora y activa el mecanismo físico de separación para clasificarlos en distintos contenedores.</p>
-        <div class="links">
-          <a href="#" target="_blank">github →</a>
-        </div>
-      </div>
 
-      <div class="project">
-        <div class="project-head">
-          <span class="project-name">DonCEy Kong Jr.</span>
-          <span class="project-tag">Java · C/Raylib</span>
+        <div class="project">
+          <div class="project-head">
+            <span class="project-name">BusCEMinas</span>
+            <span class="project-tag">Racket</span>
+          </div>
+          <p>Implementación de Buscaminas con programación funcional, explorando Racket y los paradigmas funcionales en el curso de Paradigmas de Programación.</p>
+          <div class="links">
+            <a href="#" target="_blank">github →</a>
+          </div>
         </div>
-        <p>Juego multijugador con arquitectura cliente-servidor para el curso de Paradigmas de Programación: servidor en Java, cliente en C con Raylib.</p>
-        <div class="links">
-          <a href="#" target="_blank">github →</a>
-        </div>
-      </div>
-
-      <div class="project">
-        <div class="project-head">
-          <span class="project-name">BusCEMinas</span>
-          <span class="project-tag">Racket</span>
-        </div>
-        <p>Implementación de Buscaminas con programación funcional, explorando Racket y los paradigmas funcionales en el curso de Paradigmas de Programación.</p>
-        <div class="links">
-          <a href="#" target="_blank">github →</a>
-        </div>
-      </div>
-
       </div>
     </section>
 
     <section id="experiencia-educacion" class="split">
       <div class="split-col" id="experiencia">
-      <h2>tail -f experiencia.log</h2>
-
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-marker"></div>
-          <div class="tl-content">
-            <div class="tl-head">
-              <span class="tl-role">Asistente de laboratorio — Química General</span>
-              <span class="tl-date">2024 – 2026</span>
+        <h2>tail -f experiencia.log</h2>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-marker"></div>
+            <div class="tl-content">
+              <div class="tl-head">
+                <span class="tl-role">Asistente de laboratorio — Química General</span>
+                <span class="tl-date">2024 – 2026</span>
+              </div>
+              <span class="tl-org">Tecnológico de Costa Rica</span>
+              <p>Apoyo a estudiantes durante sesiones de laboratorio; revisión y calificación de reportes y evaluaciones.</p>
             </div>
-            <span class="tl-org">Tecnológico de Costa Rica</span>
-            <p>Apoyo a estudiantes durante sesiones de laboratorio; revisión y calificación de reportes y evaluaciones.</p>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-marker"></div>
+            <div class="tl-content">
+              <div class="tl-head">
+                <span class="tl-role">Pasantía técnica</span>
+                <span class="tl-date">Oct – Dic 2022</span>
+              </div>
+              <span class="tl-org">Universidad Estatal a Distancia (UNED)</span>
+              <p>Mantenimiento y troubleshooting de equipo de cómputo, configuración de redes, elaboración de documentación técnica y apoyo en la instrucción de un curso de robótica.</p>
+            </div>
           </div>
         </div>
+        </div>
 
-        <div class="tl-item">
-          <div class="tl-marker"></div>
-          <div class="tl-content">
+        <div class="split-col" id="educacion">
+          <h2>cat educacion.md</h2>
+          <div class="edu-item">
             <div class="tl-head">
-              <span class="tl-role">Pasantía técnica</span>
-              <span class="tl-date">Oct – Dic 2022</span>
+              <span class="tl-role">Licenciatura Ingeniería en Computadores (en curso)</span>
+              <span class="tl-date">2024 – presente</span>
             </div>
-            <span class="tl-org">Universidad Estatal a Distancia (UNED)</span>
-            <p>Mantenimiento y troubleshooting de equipo de cómputo, configuración de redes, elaboración de documentación técnica y apoyo en la instrucción de un curso de robótica.</p>
+            <span class="tl-org">Instituto Tecnológico de Costa Rica (TEC)</span>
           </div>
+          <div class="edu-item">
+            <div class="tl-head">
+              <span class="tl-role">Técnico en Redes de Telecomunicaciones</span>
+              <span class="tl-date">2017 – 2022</span>
+            </div>
+            <span class="tl-org">CTP Fernando Volio Jiménez, Quebradilla, Cartago</span>
+          </div>
+          <p class="certs">
+            <span class="key">certificaciones:</span> Cisco CCNA 1 · IT Essentials · Cybersecurity Essentials · Introduction to IoT · Linux Essentials (Linux Foundation)
+          </p>
+          <p class="certs">
+            <span class="key">idiomas:</span> Español (nativo) · Inglés B2 · Alemán A1
+          </p>
         </div>
-      </div>
-      </div>
-
-      <div class="split-col" id="educacion">
-      <h2>cat educacion.md</h2>
-      <div class="edu-item">
-        <div class="tl-head">
-          <span class="tl-role">Licenciatura Ingeniería en Computadores (en curso)</span>
-          <span class="tl-date">2024 – presente</span>
-        </div>
-        <span class="tl-org">Instituto Tecnológico de Costa Rica (TEC)</span>
-      </div>
-      <div class="edu-item">
-        <div class="tl-head">
-          <span class="tl-role">Técnico en Redes de Telecomunicaciones</span>
-          <span class="tl-date">2017 – 2022</span>
-        </div>
-        <span class="tl-org">CTP Fernando Volio Jiménez, Quebradilla, Cartago</span>
-      </div>
-      <p class="certs">
-        <span class="key">certificaciones:</span> Cisco CCNA 1 · IT Essentials · Cybersecurity Essentials · Introduction to IoT · Linux Essentials (Linux Foundation)
-      </p>
-      <p class="certs">
-        <span class="key">idiomas:</span> Español (nativo) · Inglés B2 · Alemán A1
-      </p>
-      </div>
     </section>
 
     <section id="skills">
@@ -316,7 +310,7 @@
       </div>
     </section>
 
-    <footer>
+    <footer> <!--Detalle / leyenda al final de la página-->
       hecho a mano · desplegado con GitHub Pages
     </footer>
 
