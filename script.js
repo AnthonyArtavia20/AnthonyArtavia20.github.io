@@ -5,13 +5,12 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; //Opción de accesibilidad para gente sensible a animaciones, se le pregunta al navegador de la misma y matchMedia() evalúa una media query de CSS desde JS y .matches nos da true/false.
   const cmd = "neofetch --whoami";//El texto del "comando" que se va a simular escribiendo, letra por letra.
   const lines = [ //Array de mi info, modificable obvio
-    ['nombre', 'Anthony Artavia Leitón'],
-    ['carrera', 'Ingeniería en Computadores'],
-    ['institución', 'TEC — Cartago, Costa Rica'],
-    ['carné', '2024'],
-    ['stack', 'Python · C/C++ · React · SQL'],
-    ['idiomas', 'ES nativo · EN B2 · DE A1'],
-    ['status', 'buscando pasantía / proyectos'],
+    ['Nombre', 'Anthony Artavia Leitón'],
+    ['Carrera', 'Licenciatura en Ingeniería en Computadores'],
+    ['Institución', 'Instituto Tecnológico de Costa Rica (ITCR)(TEC)'],
+    ['Stack', 'Python · C# · C/C++ · · React · SQL'],
+    ['Idiomas', 'Español: Nativo, Inglés: Avanzado (B2), Alemán: Inicial(A1)'],
+    ['Status', 'Estudiando pero a la vez buscando pasantía / proyectos'],
   ];
 
   // Función que construye el HTML de salida a partir del array `lines` y lo mete dentro de outEl (#term-output).
