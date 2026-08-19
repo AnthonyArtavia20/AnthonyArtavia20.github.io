@@ -5,36 +5,42 @@ const projects = [
     tag: 'C · Linux',
     description:
       'Monitor de sistema para Linux escrito en C: CPU, memoria, procesos y demás métricas en tiempo real, directo desde la terminal. Proyecto personal para profundizar en programación de sistemas.',
+    link: '',
   },
   {
     name: 'F1 Garage Manager',
     tag: 'React · Node/Express · SQL Server · Docker',
     description:
       'Sistema full-stack de gestión para un equipo de F1, hecho para el curso de Bases de Datos. Autenticación por roles, CRUD de equipos/autos/inventario, procedimientos almacenados y transacciones para reglas de negocio, un motor de simulación de carreras y un dashboard de analítica en Grafana.',
+    link: 'https://github.com/AnthonyArtavia20/F1GarageManagerBDVerano',
   },
   {
     name: 'Genetic Kingdom',
     tag: 'C++',
     description:
       'Tower-defense hecho para el curso de Algoritmos y Estructuras de Datos II. Combina pathfinding con algoritmos genéticos/evolutivos para controlar el comportamiento de los enemigos.',
+    link: 'https://github.com/AnthonyArtavia20/Genetic_Kingdom_Game',
   },
   {
-    name: 'Conveyor Belt Image Analyzer',
+    name: 'Compare Belt Image Analyzer',
     tag: 'Python · JavaScript · C#',
     description:
       'Sistema de clasificación de imágenes que identifica tomates y papas sobre una banda transportadora y activa el mecanismo físico de separación para clasificarlos en distintos contenedores.',
+    link: 'https://github.com/AnthonyArtavia20/CompareBeltImageAnalyzer',
   },
   {
     name: 'DonCEy Kong Jr.',
     tag: 'Java · C/Raylib',
     description:
       'Juego multijugador con arquitectura cliente-servidor para el curso de Paradigmas de Programación: servidor en Java, cliente en C con Raylib.',
+    link: 'https://github.com/AnthonyArtavia20/DonCEyKongJr---Game',
   },
   {
     name: 'BusCEMinas',
     tag: 'Racket',
     description:
       'Implementación de Buscaminas con programación funcional, explorando Racket y los paradigmas funcionales en el curso de Paradigmas de Programación.',
+    link: 'https://github.com/AnthonyArtavia20/BusCEMinas',
   },
 ];
 
@@ -111,7 +117,7 @@ export function about() {
 export function projectsSection() {
   const cards = projects
     .map(
-      ({ name, tag, description }) => `
+      ({ name, tag, description, link }) => `
         <div class="project">
           <div class="project-head">
             <span class="project-name">${name}</span>
@@ -119,7 +125,11 @@ export function projectsSection() {
           </div>
           <p>${description}</p>
           <div class="links">
-            <a href="#" target="_blank">github →</a>
+            ${
+              link
+                ? `<a href="${link}" target="_blank" rel="noopener">github →</a>`
+                : `<span class="project-link-disabled">Repo privado ó en desarrollo</span>`
+            }
           </div>
         </div>`
     )
@@ -143,8 +153,27 @@ export function experience() {
             <div class="tl-marker"></div>
             <div class="tl-content">
               <div class="tl-head">
+                <span class="tl-role">Consultor y técnico de Infraestructura de TI (freelance)</span>
+                <span class="tl-date">Jul – Ago 2026</span>
+              </div>
+              <span class="tl-org">FJA Holding</span>
+              <p>
+                Auditoría y mantenimiento completo de infraestructura de TI (equipos de
+                cómputo, servidores, red, UPS e impresoras) previo a migración a la nube. Diagnóstico y
+                recuperación de datos de discos duros dañados, diagnóstico de falla crítica en servidor
+                , consolidación de red (eliminación de switch redundante vía análisis de
+                tráfico con nmap/arp-scan) y hallazgo de un riesgo de seguridad de datos personales (PII)
+                en equipo dado de baja. Entrega de bitácora técnica e informes de avance con
+                recomendaciones priorizadas.
+              </p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-marker"></div>
+            <div class="tl-content">
+              <div class="tl-head">
                 <span class="tl-role">Asistente de laboratorio — Química General</span>
-                <span class="tl-date">2024 – 2026</span>
+                <span class="tl-date">2024 – Actualidad</span>
               </div>
               <span class="tl-org">Tecnológico de Costa Rica</span>
               <p>Apoyo a estudiantes durante sesiones de laboratorio; revisión y calificación de reportes y evaluaciones.</p>
